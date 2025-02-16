@@ -1,6 +1,6 @@
 # minio-s3
 
-Remplacer acesskeyId et secretAcessKey correctement
+
 ```
 npm i
 npm run dev
