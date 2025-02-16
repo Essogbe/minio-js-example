@@ -5,7 +5,7 @@ import { Upload } from "@aws-sdk/lib-storage";
 import dotenv from "dotenv";
 
 
-dotenv.config(); // Charge les variables d'environnement depuis le fichier .env
+dotenv.config();
 
 export const bucket = process.env.S3_BUCKET;
 
@@ -15,7 +15,7 @@ export const s3 = new S3({
     accessKeyId: process.env.S3_ACCESS_KEY,
     secretAccessKey: process.env.S3_SECRET_KEY,
   },
-  region: process.env.S3_REGION, // Ajout de la région pour éviter l'erreur
+  region: process.env.S3_REGION, 
   tls: false,
   forcePathStyle: true,
 });
