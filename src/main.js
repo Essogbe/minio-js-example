@@ -2,21 +2,24 @@
 import multer from "multer";
 import { S3 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
+import dotenv from "dotenv";
 
-// Nom de ton bucket
-export const bucket = "test";
 
-// Configuration du client S3 avec AWS SDK v3
+dotenv.config(); // Charge les variables d'environnement depuis le fichier .env
+
+export const bucket = process.env.S3_BUCKET;
+
 export const s3 = new S3({
-  endpoint: "http://35.223.207.93:9000",
+  endpoint: process.env.S3_ENDPOINT,
   credentials: {
-    accessKeyId: "*",
-    secretAccessKey: "*",
+    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: process.env.S3_SECRET_KEY,
   },
-  region: "us-east-1", 
-  tls: false,  // Désactive SSL
-  forcePathStyle: true,  // Utilise le style de chemin forcé pour MinIO
+  region: process.env.S3_REGION, // Ajout de la région pour éviter l'erreur
+  tls: false,
+  forcePathStyle: true,
 });
+
 
 // Utilisation de multer pour gérer les fichiers téléchargés en mémoire
 const storage = multer.memoryStorage();  // On garde les fichiers en mémoire
@@ -56,19 +59,19 @@ export const getFileFromS3 = async (fileKey) => {
   }
 };
 
-// Exemple d'utilisation avec Express pour uploader un fichier
+
 import express from "express";
 
 const app = express();
 
-// Route pour uploader un fichier
+
 app.post("/upload", upload.single("file"), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: "No file uploaded" });
   }
 
   try {
-    const key = Date.now().toString();  // Utilisation de la date actuelle comme clé
+    const key = Date.now().toString();  // Utilisation de la date actuelle comme clé (optionnel)
     const fileBuffer = req.file.buffer;
     const result = await uploadFileToS3(fileBuffer, key);
     res.json({ message: "File uploaded successfully", key });
