@@ -1,5 +1,7 @@
 
 ![alt text](app-minio.png)
+
+**Documentation officielle du SDK utilisé** : https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/s3/
 # Introduction
 
 ## Qu'est-ce que MinIO ?
