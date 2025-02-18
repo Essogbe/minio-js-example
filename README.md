@@ -1,3 +1,5 @@
+
+![alt text](app-minio.png)
 # Introduction
 
 ## Qu'est-ce que MinIO ?
@@ -206,7 +208,7 @@ Cela est la solution la plus simple mais un backend 'classique' n'est pas destin
 
 Proxy Nginx car il sera configuré  au niveau du serveur Minio et peut vérifier l'origine de la requete en validant le token (JWT par exemple) envoyé par un client avant de rediriger vers Minio . Il faudra  mettre excette restriction exclusivement sur un bucket particulier(celui ou ceux qui nous interessent) et avec la possibilité d'exclure cette vérification pour une IP ( celle de notre backend CRUD par exemple) .
 
-
+![alt text](app-minio-2.png)
 ### Et maintenant ?
 
 Si la sécurité n'est pas un enjeu critique pour le problème évoqué, à court terme , on peut se contenter d'un URL pré signé temporaire vers le frontend pour uploder le fichier . Dans le cas contraire , on choisira une des approches évoquées plus haut dans les contraintes de temps et de complexité  .
